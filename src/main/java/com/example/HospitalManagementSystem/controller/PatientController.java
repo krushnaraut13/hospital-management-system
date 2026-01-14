@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 import com.example.HospitalManagementSystem.entity.Patient;
 import com.example.HospitalManagementSystem.service.PatientService;
 
-
 @RestController
 @RequestMapping("/api/patients")
 public class PatientController {
