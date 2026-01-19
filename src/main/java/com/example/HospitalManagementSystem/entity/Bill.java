@@ -20,6 +20,7 @@ public class Bill {
     private String paymentStatus; // PAID / UNPAID
 
     private LocalDate billDate;
+    
 
     //ONE appointment → ONE bill
     //One appointment produces only one bill and Prevents duplicate billing

@@ -22,8 +22,7 @@ public class Doctor {
    private long countByAvailable(boolean available) {
 	return 0;
 }
-
-
+   
     // Constructors
     public Doctor() {}
 
