@@ -4,9 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.example.HospitalManagementSystem.entity.Bill;
 import com.example.HospitalManagementSystem.service.BillService;
+import com.example.HospitalManagementSystem.util.AuthorizationUtil;
 
 @RestController
 @RequestMapping("/api/bills")
+@CrossOrigin(origins = "*")
 public class BillController {
 
     @Autowired
@@ -21,7 +23,10 @@ public class BillController {
 
     // Get bill by ID
     @GetMapping("/{billId}")
-    public Bill getBill(@PathVariable Long billId) {
-        return billService.getBillById(billId);
+    public Bill getBill(@RequestHeader("role") String role,
+    		            @PathVariable Long billId) {
+        AuthorizationUtil.checkRole(role, "PATIENT", "ADMIN");
+
+    	return billService.getBillById(billId);
     }
 }

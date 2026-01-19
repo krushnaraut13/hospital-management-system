@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import com.example.HospitalManagementSystem.entity.Patient;
 import com.example.HospitalManagementSystem.repository.PatientRepository;
 
-
 @Service
 public class PatientServiceImpl implements PatientService {
 
@@ -30,7 +29,28 @@ public class PatientServiceImpl implements PatientService {
         return patientRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Patient not found"));
     }
+    
+    @Override
+    public List<Patient> searchPatientsByName(String name) {
+        return patientRepository.findByNameContainingIgnoreCase(name);
+    }
 
+    @Override
+    public List<Patient> searchPatients(
+            String name,
+            String gender,
+            String bloodGroup) {
+
+        return patientRepository.findByNameContainingIgnoreCaseAndGenderIgnoreCaseAndBloodGroupIgnoreCase(
+                        name, gender, bloodGroup
+                );
+    }
+
+    @Override
+    public List<Patient> getPatientsByNameAndBloodGroup(String name, String bloodGroup) {
+        return patientRepository.findByNameContainingIgnoreCaseAndBloodGroupIgnoreCase(name, bloodGroup);
+    }
+    
     @Override
     public Patient updatePatient(Long id, Patient patient) {
         Patient existing = getPatientById(id);

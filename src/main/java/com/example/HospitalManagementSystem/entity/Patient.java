@@ -85,4 +85,13 @@ public class Patient {
     public LocalDate getRegistrationDate() {
         return registrationDate;
     }
+
+	@Override
+	public String toString() {
+		return "Patient [patientId=" + patientId + ", name=" + name + ", age=" + age + ", gender=" + gender
+				+ ", contactNumber=" + contactNumber + ", address=" + address + ", bloodGroup=" + bloodGroup
+				+ ", registrationDate=" + registrationDate + "]";
+	}
+    
+    
 }

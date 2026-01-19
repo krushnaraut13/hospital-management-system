@@ -7,9 +7,11 @@ import org.springframework.web.bind.annotation.*;
 
 import com.example.HospitalManagementSystem.entity.Patient;
 import com.example.HospitalManagementSystem.service.PatientService;
+import com.example.HospitalManagementSystem.util.AuthorizationUtil;
 
 @RestController
 @RequestMapping("/api/patients")
+@CrossOrigin(origins = "*")
 public class PatientController {
 
     @Autowired
@@ -17,8 +19,12 @@ public class PatientController {
 
     // Add patient
     @PostMapping
-    public Patient addPatient(@RequestBody Patient patient) {
-        return patientService.addPatient(patient);
+    public Patient addPatient(@RequestHeader("role") String role,
+    		                  @RequestBody Patient patient) {
+        
+    	AuthorizationUtil.checkRole(role, "RECEPTIONIST", "PATIENT");
+
+    	return patientService.addPatient(patient);
     }
 
     // Get all patients
@@ -31,6 +37,29 @@ public class PatientController {
     @GetMapping("/{id}")
     public Patient getPatient(@PathVariable Long id) {
         return patientService.getPatientById(id);
+    }
+    
+    @GetMapping("/search")
+    public List<Patient> searchPatients(@RequestParam String name) {
+        return patientService.searchPatientsByName(name);
+    }
+
+ // Combined filter search
+    @GetMapping("/filters")
+    public List<Patient> filterPatients(
+            @RequestParam String name,
+            @RequestParam String gender,
+            @RequestParam String bloodGroup) {
+
+        return patientService.searchPatients(name, gender, bloodGroup);
+    }
+    
+    @GetMapping("/filter")
+    public List<Patient> filterPatients(
+            @RequestParam String name,
+            @RequestParam String bloodGroup//A%2B
+    ) {
+        return patientService.getPatientsByNameAndBloodGroup(name, bloodGroup);
     }
 
     // Update patient

@@ -1,5 +1,6 @@
 package com.example.HospitalManagementSystem.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -49,6 +50,11 @@ public class AppointmentServiceImpl implements AppointmentService {
                 .orElseThrow(() -> new RuntimeException("Appointment not found"));
     }
 
+    @Override
+    public List<Appointment> getAppointmentsByDate(LocalDate date) {
+        return appointmentRepository.findByAppointmentDate(date);
+    }
+    
     @Override
     public void cancelAppointment(Long id) {
         Appointment appointment = getAppointmentById(id);

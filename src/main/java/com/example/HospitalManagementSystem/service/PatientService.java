@@ -15,4 +15,17 @@ public interface PatientService {
     Patient updatePatient(Long id, Patient patient);
 
     void deletePatient(Long id);
+    
+    List<Patient> searchPatientsByName(String name);
+    
+    List<Patient> searchPatients(
+            String name,
+            String gender,
+            String bloodGroup
+    );
+    
+    List<Patient> getPatientsByNameAndBloodGroup(String name, String bloodGroup);
+
+    
+
 }

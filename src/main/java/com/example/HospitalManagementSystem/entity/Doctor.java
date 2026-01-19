@@ -18,6 +18,11 @@ public class Doctor {
     private String email;
     private String department;
     private boolean available;
+    
+   private long countByAvailable(boolean available) {
+	return 0;
+}
+
 
     // Constructors
     public Doctor() {}
@@ -86,4 +91,13 @@ public class Doctor {
     public void setAvailable(boolean available) {
         this.available = available;
     }
+
+	@Override
+	public String toString() {
+		return "Doctor [doctorId=" + doctorId + ", name=" + name + ", specialization=" + specialization
+				+ ", experience=" + experience + ", contactNumber=" + contactNumber + ", email=" + email
+				+ ", department=" + department + ", available=" + available + "]";
+	}
+    
+    
 }

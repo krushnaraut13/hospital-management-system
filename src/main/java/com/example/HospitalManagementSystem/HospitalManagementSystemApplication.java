@@ -44,7 +44,9 @@ Billing and payments
 
 🔹 STEP 4: Doctor Consultation
 4=Doctor consults the patient and the doctor writes a prescription
+  Ensured one prescription per appointment to avoid duplication.
   POST /api/prescriptions/appointment/{appointmentId}
+  
 🔹 STEP 5: Billing System
 5=After consultation, billing desk generate the bill.
   POST /api/bills/appointment/{appointmentId}

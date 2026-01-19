@@ -31,7 +31,31 @@ public class DoctorServiceImpl implements DoctorService {
         return doctorRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Doctor not found"));
     }
+    
+    @Override
+    public List<Doctor> searchDoctorsByName(String name) {
+        return doctorRepository.findByNameContainingIgnoreCase(name);
+    }
 
+    @Override
+    public List<Doctor> searchBySpecialization(String specialization) {
+        return doctorRepository.findBySpecializationContainingIgnoreCase(specialization);
+    }
+    @Override
+    public List<Doctor> searchByDepartment(String department) {
+        return doctorRepository.findByDepartmentContainingIgnoreCase(department);
+    }
+
+    @Override
+    public List<Doctor> searchByAvailability(boolean available) {
+        return doctorRepository.findByAvailable(available);
+    }
+
+    @Override
+    public List<Doctor> searchByDepartmentAndAvailability(String department,boolean available) {
+        return doctorRepository.findByDepartmentIgnoreCaseAndAvailable(department, available);
+    }
+    
     @Override
     public Doctor updateDoctor(Long id, Doctor doctor) {
         Doctor existing = getDoctorById(id);

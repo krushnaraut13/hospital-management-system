@@ -14,4 +14,14 @@ public interface DoctorService {
     Doctor updateDoctor(Long id, Doctor doctor);
 
     void deleteDoctor(Long id);
+    
+    List<Doctor> searchDoctorsByName(String name);
+
+    List<Doctor> searchBySpecialization(String specialization);
+
+    List<Doctor> searchByDepartment(String department);
+
+    List<Doctor> searchByAvailability(boolean available);
+
+    List<Doctor> searchByDepartmentAndAvailability(String department,boolean available);
 }
