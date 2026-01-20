@@ -68,7 +68,7 @@ public class DoctorController {
     
     // Combined filter API
     //Combined filters reduce multiple API calls, improve performance, and provide accurate results in a single request.
-    //“Show me all available doctors from the Cardiology department.”
+    //“Show me all available doctors from the Cardiology[Specific] department.”
     @GetMapping("/filter")
     public List<Doctor> filterDoctors(
             @RequestParam String department,

@@ -24,8 +24,8 @@ public class BillServiceImpl implements BillService {
                 .orElseThrow(() -> new RuntimeException("Appointment not found"));
 
         bill.setAppointment(appointment);
-        bill.calculateTotal(); // 🔥 auto total
-        bill.setPaymentStatus("PAID");
+        bill.calculateTotal();           // 🔥 auto total
+        bill.setPaymentStatus("UNPAID");//Payment happens later, not during bill generation.
 
         return billRepository.save(bill);
     }

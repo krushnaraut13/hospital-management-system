@@ -16,9 +16,11 @@ public class BillController {
 
     // Generate bill for appointment
     @PostMapping("/appointment/{appointmentId}")
-    public Bill generateBill(@PathVariable Long appointmentId,
+    public Bill generateBill(@RequestHeader("role") String role,
+    		                 @PathVariable Long appointmentId,
                              @RequestBody Bill bill) {
-        return billService.generateBill(appointmentId, bill);
+    	AuthorizationUtil.checkRole(role, "RECEPTIONIST", "ADMIN");
+    	return billService.generateBill(appointmentId, bill);
     }
 
     // Get bill by ID
