@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 
 import com.example.HospitalManagementSystem.repository.AppointmentRepository;
+import com.example.HospitalManagementSystem.repository.BillRepository;
 import com.example.HospitalManagementSystem.repository.DoctorRepository;
 import com.example.HospitalManagementSystem.repository.PatientRepository;
 
@@ -16,14 +17,18 @@ public class DashboardServiceImpl implements DashboardService {
     private final PatientRepository patientRepository;
     private final DoctorRepository doctorRepository;
     private final AppointmentRepository appointmentRepository;
+	private final BillRepository billRepository;
 
     public DashboardServiceImpl(
             PatientRepository patientRepository,
             DoctorRepository doctorRepository,
-            AppointmentRepository appointmentRepository) {
+            AppointmentRepository appointmentRepository,
+            BillRepository billRepository )
+    {
         this.patientRepository = patientRepository;
         this.doctorRepository = doctorRepository;
         this.appointmentRepository = appointmentRepository;
+        this.billRepository=billRepository;
     }
 
     @Override
@@ -34,8 +39,8 @@ public class DashboardServiceImpl implements DashboardService {
         dashboard.put("totalPatients", patientRepository.count());
         dashboard.put("totalDoctors", doctorRepository.count());
         dashboard.put("availableDoctors", doctorRepository.countByAvailable(true));
-        dashboard.put("todayAppointments",appointmentRepository.countByAppointmentDate(LocalDate.now()));
-     
+        dashboard.put("todayAppointments",appointmentRepository.count());
+        dashboard.put("pendingBills", billRepository.countByPaymentStatus("UNPAID"));
         return dashboard;
     }
 }
